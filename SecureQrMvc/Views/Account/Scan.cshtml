@@ -1,0 +1,20 @@
+@model ScanApproveViewModel
+@{ ViewData["Title"] = "Approve QR Login"; }
+<section class="auth-wrap scan-bg">
+    <div class="auth-card">
+        <div class="badge">Phone Approval</div>
+        <h1>Approve desktop login</h1>
+        <p>Enter your credentials to approve this QR login session.</p>
+        <form asp-action="Scan" method="post">
+            <input type="hidden" asp-for="SessionId" />
+            <input type="hidden" asp-for="Token" />
+            <div asp-validation-summary="ModelOnly" class="validation"></div>
+            <label asp-for="Email"></label><input asp-for="Email" class="input" placeholder="admin@secureqr.local" />
+            <span asp-validation-for="Email" class="validation"></span>
+            <label asp-for="Password"></label><input asp-for="Password" class="input" placeholder="Admin@12345" />
+            <span asp-validation-for="Password" class="validation"></span>
+            <button class="btn primary full">Approve Login</button>
+        </form>
+    </div>
+</section>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

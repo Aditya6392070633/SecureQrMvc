@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SecureQR</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+<header class="topbar">
+    <a class="brand" asp-controller="Home" asp-action="Index"><span class="brand-icon">◆</span> SecureQR</a>
+    <nav>
+        <a asp-controller="Home" asp-action="Index">Home</a>
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <a asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+            <form asp-controller="Account" asp-action="Logout" method="post" class="inline-form"><button class="link-btn">Logout</button></form>
+        }
+        else
+        {
+            <a asp-controller="Account" asp-action="Login">Login</a>
+            <a class="nav-pill" asp-controller="Account" asp-action="QrLogin">QR Login</a>
+        }
+    </nav>
+</header>
+<main>@RenderBody()</main>
+<footer>SecureQR MVC • QR approval login • Cookie auth • PBKDF2 hashing • CSRF protection</footer>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

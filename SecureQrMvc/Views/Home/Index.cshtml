@@ -1,0 +1,30 @@
+@{
+    ViewData["Title"] = "Home";
+}
+<section class="hero">
+    <div class="hero-content">
+        <div class="badge">Advanced ASP.NET Core MVC Security Project</div>
+        <h1>Login to your website by scanning a secure QR code.</h1>
+        <p>This project gives you a modern MVC website with password login, QR approval login, lockout protection, hashed tokens, SignalR live status, secure cookies, CSRF, CSP headers and dashboard pages.</p>
+        <div class="hero-actions">
+            <a class="btn primary" asp-controller="Account" asp-action="QrLogin">Try QR Login</a>
+            <a class="btn ghost" asp-controller="Account" asp-action="Login">Password Login</a>
+        </div>
+    </div>
+    <div class="glass-card security-card">
+        <h3>Security included</h3>
+        <ul>
+            <li>One-time QR token with SHA-256 hash</li>
+            <li>3-minute QR expiry</li>
+            <li>Login rate limiting</li>
+            <li>Account lockout after failed attempts</li>
+            <li>PBKDF2 password hashing</li>
+            <li>SignalR browser approval notification</li>
+        </ul>
+    </div>
+</section>
+<section class="features">
+    <div class="feature-card"><h3>Modern UI</h3><p>Gradient hero, glass cards, responsive forms and dashboard layout.</p></div>
+    <div class="feature-card"><h3>QR Login Flow</h3><p>Desktop shows QR. Phone scans, enters credentials, desktop logs in.</p></div>
+    <div class="feature-card"><h3>Ready Database</h3><p>SQLite by default for easy run. Can change to SQL Server in appsettings.</p></div>
+</section>

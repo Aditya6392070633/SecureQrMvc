@@ -1,0 +1,23 @@
+@model LoginViewModel
+@{ ViewData["Title"] = "Login"; }
+<section class="auth-wrap">
+    <div class="auth-card">
+        <h1>Welcome back</h1>
+        <p>Use password login or choose QR login for quick secure approval.</p>
+        <form asp-action="Login" method="post">
+            <div asp-validation-summary="ModelOnly" class="validation"></div>
+            <label asp-for="Email"></label><input asp-for="Email" class="input" placeholder="admin@secureqr.local" />
+            <span asp-validation-for="Email" class="validation"></span>
+            <label asp-for="Password"></label><input asp-for="Password" class="input" placeholder="Admin@12345" />
+            <span asp-validation-for="Password" class="validation"></span>
+            <label class="check"><input asp-for="RememberMe" /> Remember me</label>
+            <button class="btn primary full">Login</button>
+        </form>
+        <div class="split-actions">
+            <a asp-action="QrLogin">Login with QR</a>
+            <a asp-action="Register">Create account</a>
+        </div>
+        <div class="demo-box">Demo: <b>admin@secureqr.local</b> / <b>Admin@12345</b></div>
+    </div>
+</section>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

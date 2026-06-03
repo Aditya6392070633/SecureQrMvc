@@ -1,0 +1,25 @@
+@{ ViewData["Title"] = "Dashboard"; }
+<section class="dashboard">
+    <div class="dash-header">
+        <div><div class="badge">Protected Area</div><h1>Hello, @ViewBag.UserName</h1><p>Your secure QR-authenticated dashboard is active.</p></div>
+        <div class="metric highlight"><span>Security Score</span><b>98%</b></div>
+    </div>
+    <div class="metric-grid">
+        <div class="metric"><span>QR Sessions</span><b>Encrypted</b><small>Tokens stored as hashes</small></div>
+        <div class="metric"><span>Authentication</span><b>Cookie</b><small>HttpOnly + SameSite</small></div>
+        <div class="metric"><span>Password</span><b>PBKDF2</b><small>150,000 iterations</small></div>
+        <div class="metric"><span>Login Guard</span><b>Enabled</b><small>Rate limit + lockout</small></div>
+    </div>
+    <div class="table-card">
+        <h2>Recent security activity</h2>
+        <table>
+            <thead><tr><th>Feature</th><th>Status</th><th>Details</th></tr></thead>
+            <tbody>
+                <tr><td>CSRF protection</td><td><span class="pill ok">Active</span></td><td>AutoValidateAntiforgeryToken enabled</td></tr>
+                <tr><td>CSP headers</td><td><span class="pill ok">Active</span></td><td>Blocks unsafe external content</td></tr>
+                <tr><td>QR expiry</td><td><span class="pill ok">Active</span></td><td>3 minutes by default</td></tr>
+                <tr><td>One-time consumption</td><td><span class="pill ok">Active</span></td><td>Approved session consumed once</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>

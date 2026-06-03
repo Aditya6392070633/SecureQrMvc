@@ -1,0 +1,42 @@
+@model QrLoginStartViewModel
+@{ ViewData["Title"] = "QR Login"; }
+<section class="qr-layout">
+    <div class="glass-card qr-panel">
+        <div class="badge">Live QR Login</div>
+        <h1>Scan this QR using your phone</h1>
+        <p>After approval on your phone, this browser will login automatically.</p>
+        <img class="qr-img" src="data:image/png;base64,@Model.QrImageBase64" alt="Secure QR Login" />
+        <div class="timer">Expires UTC: @Model.ExpiresAtUtc.ToString("HH:mm:ss")</div>
+        <div id="qrStatus" class="status waiting">Waiting for approval...</div>
+        <form id="qrStatusForm" asp-action="QrStatus" method="post">
+            <input type="hidden" name="sessionId" value="@Model.SessionId" />
+        </form>
+    </div>
+    <div class="glass-card steps-card">
+        <h3>How it works</h3>
+        <ol>
+            <li>Desktop creates a random one-time QR token.</li>
+            <li>Only token hash is saved in database.</li>
+            <li>Phone scans and verifies user credentials.</li>
+            <li>Desktop receives SignalR approval and signs in.</li>
+        </ol>
+    </div>
+</section>
+@section Scripts {
+<script src="https://unpkg.com/@@microsoft/signalr@8.0.7/dist/browser/signalr.min.js"></script>
+<script>
+const sessionId = '@Model.SessionId';
+const statusBox = document.getElementById('qrStatus');
+const connection = new signalR.HubConnectionBuilder().withUrl('/qrLoginHub').build();
+connection.start().then(() => connection.invoke('JoinQrSession', sessionId));
+connection.on('QrApproved', async () => {
+    statusBox.textContent = 'Approved. Signing you in...';
+    statusBox.className = 'status success';
+    const form = document.getElementById('qrStatusForm');
+    const data = new FormData(form);
+    const res = await fetch(form.action, { method:'POST', body:data, credentials:'same-origin' });
+    const json = await res.json();
+    if(json.ok) window.location.href = json.redirect;
+});
+</script>
+}
